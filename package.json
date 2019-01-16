@@ -1,0 +1,24 @@
+{
+  "name": "github-org-metrics",
+  "version": "0.1.0",
+  "description": "",
+  "main": "export.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "bin" : { "github-org-metrics" : "./cli.js" },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Mikeal Rogers <mikeal.rogers@gmail.com> (http://www.mikealrogers.com)",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "bent": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "parse-link-header": "^1.0.1",
+    "sleep-promise": "^8.0.1",
+    "tar-stream": "^1.6.2",
+    "yargs": "^12.0.5"
+  }
+}
