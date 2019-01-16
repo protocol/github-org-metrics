@@ -2,6 +2,8 @@
 const yargs = require('yargs')
 const path = require('path')
 const exportData = require('./lib/export')
+const metrics = require('./lib/metrics')
+const mkdirp = require('mkdirp')
 
 const runExport = async argv => {
   if (argv.dir === null) {
@@ -15,12 +17,12 @@ const runStatus = async argv => {
   console.log(await exportData.checkMigrationStatus(argv.org))
 }
 
-const runCSV = async arg => {
+const runCSV = async argv => {
   if (argv.dir === null) {
-    argv.dir = path.join(__dirname, argv.org)
+    argv.dir = path.join(__dirname, argv.inputDir + '_metrics')
   }
   mkdirp.sync(argv.dir)
-  exportData(argv)
+  metrics(argv)
 }
 
 const args = yargs
@@ -42,7 +44,7 @@ const args = yargs
   })
 }, runStatus)
 .command('metrics [inputDir]', 'output csv files for org metrics', (yargs) => {
-  yargs.positional('input', {
+  yargs.positional('inputDir', {
     describe: 'Name of the directory of exported migration tarballs',
     required: true
   })
