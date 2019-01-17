@@ -6,7 +6,9 @@
   "directories": {
     "lib": "lib"
   },
-  "bin" : { "github-org-metrics" : "./cli.js" },
+  "bin": {
+    "github-org-metrics": "./cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,6 +17,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "bent": "^1.2.0",
+    "csv-writer": "^1.2.0",
     "mkdirp": "^0.5.1",
     "parse-link-header": "^1.0.1",
     "sleep-promise": "^8.0.1",
