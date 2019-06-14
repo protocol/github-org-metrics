@@ -19,6 +19,7 @@
     "bent": "^1.2.0",
     "csv-parse": "^4.3.1",
     "csv-writer": "^1.2.0",
+    "mkcsv": "^1.0.1",
     "mkdirp": "^0.5.1",
     "parse-link-header": "^1.0.1",
     "sleep-promise": "^8.0.1",
