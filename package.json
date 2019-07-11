@@ -1,8 +1,7 @@
 {
   "name": "github-org-metrics",
-  "version": "0.1.0",
-  "description": "",
-  "main": "export.js",
+  "version": "0.0.0",
+  "description": "Note: this is still under heavy active development and breaking changes may land without notice.",
   "directories": {
     "lib": "lib"
   },
@@ -25,5 +24,14 @@
     "sleep-promise": "^8.0.1",
     "tar-stream": "^1.6.2",
     "yargs": "^12.0.5"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/protocol/github-org-metrics.git"
+  },
+  "bugs": {
+    "url": "https://github.com/protocol/github-org-metrics/issues"
+  },
+  "homepage": "https://github.com/protocol/github-org-metrics#readme"
 }
