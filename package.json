@@ -1,6 +1,6 @@
 {
   "name": "github-org-metrics",
-  "version": "0.0.0",
+  "version": "0.0.0-dev",
   "description": "Note: this is still under heavy active development and breaking changes may land without notice.",
   "directories": {
     "lib": "lib"
