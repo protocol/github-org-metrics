@@ -4,6 +4,7 @@ const path = require('path')
 const exportData = require('./lib/export')
 const metrics = require('./lib/metrics')
 const mkdirp = require('mkdirp')
+const dump = require('./lib/dump')
 
 const runExport = async argv => {
   if (argv.dir === null) {
@@ -37,6 +38,17 @@ const args = yargs
     default: null
   })
 }, runExport)
+.command('export [input]', 'export data as line separate JSON', (yargs) => {
+  yargs.positional('input', {
+    describe: 'Directory containing all exported tarballs',
+    required: true
+  })
+  .option('output', {
+    describe: 'Output file, defaults to stdout',
+    alias: 'o',
+    default: null
+  })
+}, dump)
 .command('status [org]', 'get status information on org migrations', (yargs) => {
   yargs.positional('org', {
     describe: 'Name of the org you want to check',
