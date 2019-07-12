@@ -2,7 +2,8 @@ Note: this is still under heavy active development and breaking changes may land
 
 The easiest way to use it is through `npx`.
 
-```$ npx github-org-metrics --help
+```
+$ npx github-org-metrics --help
 ```
 
 ```
