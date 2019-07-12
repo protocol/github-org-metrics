@@ -8,23 +8,22 @@ const get = bent('https://api.github.com', 'json', {
   Authorization: `token ${process.env.GHTOKEN}`
 })
 
-let file = process.argv[process.argv.length - 1]  
+const file = process.argv[process.argv.length - 1]
 
-let filecontents = fs.readFileSync(file)
+const filecontents = fs.readFileSync(file)
 
-let records = parse(filecontents.toString(), {
+const records = parse(filecontents.toString(), {
   columns: true,
   skip_empty_lines: true
 })
 
-
 const run = async () => {
-  let people = []
-  for (let row of records) {
-    let prs = parseInt(row.PRS)
+  const people = []
+  for (const row of records) {
+    const prs = parseInt(row.PRS)
     if (prs > 9) {
-      let name = row.USER
-      let info = await get(`/users/${name}`)
+      const name = row.USER
+      const info = await get(`/users/${name}`)
       people.push({
         name,
         prs: row.PRS,
@@ -35,14 +34,14 @@ const run = async () => {
         location: info.location,
         bio: info.bio
       })
-      console.log(people[people.length -1])
+      console.log(people[people.length - 1])
     }
   }
   const header = []
-  for (let key of Object.keys(people[0])) {
-    header.push({id: key, title: key.toUpperCase()})
+  for (const key of Object.keys(people[0])) {
+    header.push({ id: key, title: key.toUpperCase() })
   }
-  const csvStringifier = createObjectCsvStringifier({header})
+  const csvStringifier = createObjectCsvStringifier({ header })
   const str = [
     csvStringifier.getHeaderString(),
     csvStringifier.stringifyRecords(people)

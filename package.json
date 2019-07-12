@@ -24,7 +24,9 @@
     "tar-stream": "^1.6.2",
     "yargs": "^12.0.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "standard": "^13.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/protocol/github-org-metrics.git"

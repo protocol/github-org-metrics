@@ -26,55 +26,63 @@ const runCSV = async argv => {
   metrics(argv)
 }
 
+const tokenOption = yargs => {
+  yargs.option('token', {
+    describe: 'GitHub token',
+    required: true,
+    default: process.env.GHTOKEN
+  })
+}
+
 const args = yargs
-.command('pull [org]', 'export org data', (yargs) => {
-  yargs.positional('org', {
-    describe: 'Name of the org you want to pull',
-    required: true
+  .command('pull [org]', 'export org data', (yargs) => {
+    yargs.positional('org', {
+      describe: 'Name of the org you want to pull',
+      required: true
+    })
+      .option('dir', {
+        describe: 'Output directory, defaults to org name',
+        alias: 'd',
+        default: null
+      })
+    tokenOption(yargs)
+  }, runExport)
+  .command('export [input]', 'export data as line separate JSON', (yargs) => {
+    yargs.positional('input', {
+      describe: 'Directory containing all exported tarballs',
+      required: true
+    })
+      .option('output', {
+        describe: 'Output file, defaults to stdout',
+        alias: 'o',
+        default: null
+      })
+  }, dump)
+  .command('status [org]', 'get status information on org migrations', (yargs) => {
+    yargs.positional('org', {
+      describe: 'Name of the org you want to check',
+      required: true
+    })
+  }, runStatus)
+  .command('metrics [inputDir]', 'output csv files for org metrics', (yargs) => {
+    yargs.positional('inputDir', {
+      describe: 'Name of the directory of exported migration tarballs',
+      required: true
+    })
+      .option('dir', {
+        describe: 'Output directory, defaults to {inputDir}_metrics',
+        alias: 'd',
+        default: null
+      })
+  }, runCSV)
+  .option('verbose', {
+    describe: 'Verbose output mode',
+    alias: 'v',
+    default: false
   })
-  .option('dir', {
-    describe: 'Output directory, defaults to org name',
-    alias: 'd',
-    default: null
-  })
-}, runExport)
-.command('export [input]', 'export data as line separate JSON', (yargs) => {
-  yargs.positional('input', {
-    describe: 'Directory containing all exported tarballs',
-    required: true
-  })
-  .option('output', {
-    describe: 'Output file, defaults to stdout',
-    alias: 'o',
-    default: null
-  })
-}, dump)
-.command('status [org]', 'get status information on org migrations', (yargs) => {
-  yargs.positional('org', {
-    describe: 'Name of the org you want to check',
-    required: true
-  })
-}, runStatus)
-.command('metrics [inputDir]', 'output csv files for org metrics', (yargs) => {
-  yargs.positional('inputDir', {
-    describe: 'Name of the directory of exported migration tarballs',
-    required: true
-  })
-  .option('dir', {
-    describe: 'Output directory, defaults to ${inputDir}_metrics',
-    alias: 'd',
-    default: null
-  })
-}, runCSV)
-.option('verbose', {
-  describe: 'Verbose output mode',
-  alias: 'v',
-  default: false
-})
-.scriptName("github-org-metrics")
-.argv
+  .scriptName('github-org-metrics')
+  .argv
 
 if (!args._.length) {
   yargs.showHelp()
 }
-
