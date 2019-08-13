@@ -27,8 +27,11 @@ const runCSV = async argv => {
 }
 
 const runLs = async argv => {
-  for await (const repo of exportData.getRepos(argv.org, argv.token)) {
-    console.log(repo)
+  const orgs = argv.org.split(',')
+  for (const org of orgs) {
+    for await (const repo of exportData.getRepos(org, argv.token)) {
+      console.log(repo)
+    }
   }
 }
 
@@ -50,7 +53,7 @@ const args = yargs
   }, runLs)
   .command('pull [org]', 'export org data', yargs => {
     yargs.positional('org', {
-      describe: 'Name of the org you want to pull',
+      describe: 'Name of the org you want to pull. Supports multiple orgs with command separation.',
       required: true
     })
       .option('dir', {
