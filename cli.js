@@ -26,6 +26,12 @@ const runCSV = async argv => {
   metrics(argv)
 }
 
+const runLs = async argv => {
+  for await (let repo of exportData.getRepos(argv.org, argv.token)) {
+    console.log(repo)
+  }
+}
+
 const tokenOption = yargs => {
   yargs.option('token', {
     describe: 'GitHub token',
@@ -35,7 +41,14 @@ const tokenOption = yargs => {
 }
 
 const args = yargs
-  .command('pull [org]', 'export org data', (yargs) => {
+  .command('ls [org]', 'list all repos in org', yargs => {
+    yargs.positional('org', {
+      describe: 'Name of the org you want to pull',
+      required: true
+    })
+    tokenOption(yargs)
+  }, runLs)
+  .command('pull [org]', 'export org data', yargs => {
     yargs.positional('org', {
       describe: 'Name of the org you want to pull',
       required: true
@@ -47,7 +60,7 @@ const args = yargs
       })
     tokenOption(yargs)
   }, runExport)
-  .command('export [input]', 'export data as line separate JSON', (yargs) => {
+  .command('export [input]', 'export data as line separate JSON', yargs => {
     yargs.positional('input', {
       describe: 'Directory containing all exported tarballs',
       required: true
@@ -58,13 +71,13 @@ const args = yargs
         default: null
       })
   }, dump)
-  .command('status [org]', 'get status information on org migrations', (yargs) => {
+  .command('status [org]', 'get status information on org migrations', yargs => {
     yargs.positional('org', {
       describe: 'Name of the org you want to check',
       required: true
     })
   }, runStatus)
-  .command('metrics [inputDir]', 'output csv files for org metrics', (yargs) => {
+  .command('metrics [inputDir]', 'output csv files for org metrics', yargs => {
     yargs.positional('inputDir', {
       describe: 'Name of the directory of exported migration tarballs',
       required: true

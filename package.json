@@ -9,7 +9,7 @@
     "github-org-metrics": "./cli.js"
   },
   "scripts": {
-    "test": "echo \"No tests yet.\""
+    "test": "standard"
   },
   "keywords": [],
   "author": "Mikeal Rogers <mikeal.rogers@gmail.com> (http://www.mikealrogers.com)",
