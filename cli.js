@@ -27,7 +27,7 @@ const runCSV = async argv => {
 }
 
 const runLs = async argv => {
-  for await (let repo of exportData.getRepos(argv.org, argv.token)) {
+  for await (const repo of exportData.getRepos(argv.org, argv.token)) {
     console.log(repo)
   }
 }
