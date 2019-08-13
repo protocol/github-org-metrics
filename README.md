@@ -12,6 +12,7 @@ npx: installed 85 in 5.013s
 github-org-metrics [command]
 
 Commands:
+  github-org-metrics ls [org]            list all repos in org
   github-org-metrics pull [org]          export org data
   github-org-metrics export [input]      export data as line separate JSON
   github-org-metrics status [org]        get status information on org
